@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img slot="start" [src]="this.logo" class="logo"></ion-img>
+    <ion-title> Sesiones </ion-title>
+    <ion-icon slot="end" name="close-circle-outline" class="close-icon" (click)="dismiss()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item class="toDate">
+    <ion-label for="toDate">Desde:</ion-label>
+
+    <ion-input type="date" name="toDate" id="toDate" slot="end" [value]="this.toDate" 
+    [(ngModel)]="this.toDate" (ionChange)="getDailyReport()">
+    </ion-input>
+
+    <ion-icon slot="end" name="calendar-number-outline"></ion-icon>
+  </ion-item>
+
+  <ion-card class="sessionCard" *ngFor="let report of this.dailyReport">
+
+    <ion-card-header>
+      <h3 class="title"> {{report.dateReport | date: 'LLL dd, YYYY'}} </h3>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <h4 class="info-text"> Tiempo de jornada: {{report.totalHours}} horas {{report.totalMinutes}} minutos </h4>
+      <h4 class="info-text"> Horas de diferencia: {{report.totalHoursDiff}} horas</h4>
+      <h4 class="info-text"> Minutos de diferencia: {{report.totalMinutesDiff}} minutos</h4>
+
+    </ion-card-content>
+
+  </ion-card>
+
+
+</ion-content>

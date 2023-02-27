@@ -1,0 +1,107 @@
+<ion-content [fullscreen]="true">
+
+  <div class="info-container" [ngStyle]="{'background-color': this.backgroundColor}">
+
+    <h1 class="title" [ngStyle]="{'color': this.theme}"> {{user.company}} </h1>
+
+    <ion-img [src]="this.logo" class="logo" alt="Company"></ion-img>
+
+    <!-- USER INFO-->
+    <ion-item lines="none">
+      <ion-icon slot="start" name="person" class="icon" [ngStyle]="{'color': this.theme}"></ion-icon>
+      <ion-label class="text-info" [ngStyle]="{'color': this.theme}"> {{user.lastName}}, {{user.firstName}} </ion-label>
+    </ion-item>
+
+    <!-- TIME SESSION STARTS -->
+    <ion-item lines="none">
+      <ion-icon slot="start" name="time" class="icon" [ngStyle]="{'color': this.theme}"></ion-icon>
+      
+      <ion-label class="text-info" [ngStyle]="{'color': this.theme}" 
+      *ngIf="this.timerGoing === true">
+
+        {{this.activeSession.startDate | date:'LLL dd, YYYY HH:mm'}} 
+      
+      </ion-label>
+
+      <ion-label class="text-info" [ngStyle]="{'color': this.theme}" 
+      *ngIf="this.timerGoing === false">
+        ----------
+      </ion-label>
+    </ion-item>
+
+    <!-- LOCALIZATION SESSION-->
+    <ion-item lines="none">
+      <ion-icon slot="start" name="location" class="icon" [ngStyle]="{'color': this.theme}"></ion-icon>
+      
+      <ion-label class="text-info" [ngStyle]="{'color': this.theme}" 
+      *ngIf="this.timerGoing === true">
+
+        {{this.activeSession.startAddress}}
+
+      </ion-label>
+
+      <ion-label class="text-info" [ngStyle]="{'color': this.theme}" 
+      *ngIf="this.timerGoing === false">
+        ---------- 
+      </ion-label>
+    </ion-item>
+  </div>
+  <!-- START SESSION BUTTON -->
+  <ion-button expand="block" class="button" *ngIf="timerGoing === false" (click)="startTimer()">
+    INICIO DE JORNADA
+  </ion-button>
+  <ion-button expand="block" class="button" disabled *ngIf="timerGoing === true">
+    {{ sessionTime }} ACTIVO
+  </ion-button>
+
+  <!-- CURRENT TIME-->
+  <ion-label class="time"> {{time | date: 'HH:mm'}} </ion-label>
+
+  <!-- START BREAK BUTTON -->
+  <ion-button expand="block" class="square-button" *ngIf="timerGoing === true && !activeBreakSession" (click)="startBreakTimer()">
+    <ion-icon name="fast-food-outline" class="icon"></ion-icon>
+  </ion-button>
+
+  <!-- END BREAK BUTTON -->
+  <ion-button expand="block" class="square-button break-end-button" *ngIf="timerGoing === true && activeBreakSession"
+    (click)="endBreakTimer()">
+    <ion-icon name="briefcase-outline" class="icon"></ion-icon>
+  </ion-button>
+
+  <!-- CURRENT DATE -->
+  <ion-label class="date"> {{time | date: 'mediumDate'}} </ion-label>
+
+  <!-- END SESSION BUTTON-->
+  <ion-button expand="block" class="button" [disabled]="timerGoing === false" (click)="endTimer()">
+    FIN DE JORNADA
+  </ion-button>
+
+  <ion-grid>
+
+    <ion-row>
+
+      <!-- LOG OUT BUTTON-->
+      <ion-col size="4" class="col-bottom-buttons">
+        <ion-button class="square-button" (click)="logout()">
+          <ion-icon name="log-out-outline" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <!-- ADD ABSENCE BUTTON -->
+      <ion-col size="4" class="col-bottom-buttons">
+        <ion-button class="square-button" (click)="presentAbsenceDashboard()">
+          <ion-icon name="today-outline" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <!-- SESSION REPORT BUTTON -->
+      <ion-col size="4" class="col-bottom-buttons">
+        <ion-button class="square-button" (click)="presentSessionReportDashboard()">
+          <ion-icon name="document-text-outline" class="icon"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

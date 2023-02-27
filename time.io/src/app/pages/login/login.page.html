@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true">
+
+  <ion-img src="../../../assets/images/logo.png" class="logo"></ion-img>
+
+  <h2 class="title"> Control Horario </h2>
+  <h6 class="subtitle"> by VisibleSoft </h6>
+
+  <form #formulario=ngForm class="formulario ion-padding-horizontal" (ngSubmit)="onSubmit(formulario)">
+
+    <ion-item lines="none">
+      <ion-icon slot="start" name="person" class="icon"></ion-icon>
+      <ion-label position="stacked" class="input-label">Email</ion-label>
+      <ion-input type="email" name="email" required email [(ngModel)]="this.usuario.email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-icon slot="start" name="lock-open" class="icon"></ion-icon>
+      <ion-label position="stacked" class="input-label">Contraseña</ion-label>
+      <ion-input type="password" name="password" required [(ngModel)]="this.usuario.password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="button" type="submit" [disabled]="formulario.invalid">
+      INICIO DE SESIÓN
+    </ion-button>
+
+  </form>
+
+  <h6 class="subtitle" style="text-align:center;"> Inicie sesión para acceder al sistema.</h6>
+
+</ion-content>

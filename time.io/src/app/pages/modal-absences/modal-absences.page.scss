@@ -1,0 +1,76 @@
+ion-content{
+    --background: white;
+}
+
+ion-title{
+    text-align: center;
+    font-size: 20px;
+}
+
+.close-icon{
+    margin-right: 10px;
+    color: red;
+    font-size: 30px;
+}
+
+.logo{
+    margin-left: 10px;
+    width: 30px;
+}
+
+.saveButton{
+    --background: none;
+    border: 2px solid rgb(70, 129, 11);
+    color: rgb(70, 129, 11);
+    height: 50px;
+}
+
+    .saveButton:hover{
+        background-color: rgb(70, 129, 11);
+        border: 2px solid black;
+        color: black;
+    }
+
+.saveButton > ion-icon{
+    color: rgb(70, 129, 11);;
+}
+
+    .saveButton:hover > ion-icon{
+        color: black;
+    }
+
+ion-row{
+    margin-top: 15px;
+}
+
+footer{
+    margin-top: 15px;
+}
+
+.subtitle{
+    text-align: center;
+}
+
+.absencesContainer{
+    height: 30%;
+    overflow: auto;
+    color: black;
+}
+
+.absencesTitles > ion-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.absences > ion-col{
+    display: flex;
+    justify-content: left;
+}
+
+.checkbox{
+    opacity: 100%;
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+}

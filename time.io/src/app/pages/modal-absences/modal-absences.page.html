@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img slot="start" [src]="this.logo" class="logo"></ion-img>
+    <ion-title> Ausencias </ion-title>
+    <ion-icon slot="end" name="close-circle-outline" class="close-icon" (click)="dismiss()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form (ngSubmit)="createAbsence()" #formulario=ngForm>
+
+    <ion-grid fixed>
+      
+      <h3> Fecha de la ausencia</h3>
+
+      <ion-row>
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label for="fechaInicio">Fecha de inicio</ion-label>
+            <ion-input type="date" name="fechaInicio" required
+            [(ngModel)]="this.ausencia.startDate">
+            </ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label for="fechaFin">Fecha de fin</ion-label>
+            <ion-input type="date" name="fechaFin" required
+            [(ngModel)]="this.ausencia.endDate">
+            </ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+
+          <h3> Motivo </h3>
+
+          <ion-item>
+            <ion-select value="vacaciones" name="reason" placeholder="--Seleccione motivo de la ausencia--"
+              [(ngModel)]="this.ausencia.reason" required>
+              <ion-select-option value="Holidays">Vacaciones</ion-select-option>
+              <ion-select-option value="Rest">Descanso</ion-select-option>
+              <ion-select-option value="Inability">Incapacidad</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <footer>
+      <ion-button class="saveButton" expand="block" type="submit" [disabled]="formulario.invalid">
+        GUARDAR
+        <ion-icon slot="start" name="save-outline"></ion-icon>
+      </ion-button>
+    </footer>
+
+  </form>
+
+  <h2 class="subtitle">Lista de ausencias</h2>
+
+  <ion-grid *ngIf="this.allAbsences.length > 0" fixed class="absencesContainer">
+    <ion-row class="absencesTitles">
+      <ion-col size="3"> <h6> Inicio </h6></ion-col>
+      <ion-col size="3"> <h6> Fin </h6></ion-col>
+      <ion-col size="3"> <h6> Motivo </h6></ion-col>
+      <ion-col size="3"> <h6> Aprobada </h6></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let ausencia of this.allAbsences" class="absences">
+      <ion-col size="3"> {{ausencia.startDate}}</ion-col>
+      <ion-col size="3"> {{ausencia.endDate}}</ion-col>
+      <ion-col size="3" *ngIf="ausencia.reason === 'Inability'"> Incapacidad </ion-col>
+      <ion-col size="3" *ngIf="ausencia.reason === 'Holidays'"> Vacaciones </ion-col>
+      <ion-col size="3" *ngIf="ausencia.reason === 'Rest'"> Descanso </ion-col>
+      <ion-col size="3">
+        <ion-checkbox disabled [checked]="ausencia.approved" class="checkbox"></ion-checkbox>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

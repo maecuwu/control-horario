@@ -1,0 +1,7 @@
+{
+  "name": "timeApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
